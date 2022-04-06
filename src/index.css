@@ -1,0 +1,125 @@
+/*** CUSTOM PROPERTIES ***/
+:root {
+  --h1Color: #1d9bf0;
+  --bordeFiltrosColor: #1d9bf0;
+  --btnCompletadosColor: #dc3545;
+}
+
+@font-face {
+  font-family: "MyFont";
+  src: url("./assets/fonts/ubuntu-regular.woff2") format("woff2"),
+    url("./assets/fonts/ubuntu-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; /* 1rem = 10px */
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "MyFont", sans-serif;
+  font-size: 1.6rem;
+  background: #ece9e6;
+}
+
+h1 {
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+}
+
+a  {
+    text-decoration: none;
+}
+
+.container {
+  width: 95%;
+  width: min(55rem, 95%);
+  max-width: 120rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.shadow {
+  background-color: #fff;
+  box-shadow: 0px 5px 15px 0px rgba(112, 112, 112, 0.48);
+  border-radius: 2px;
+}
+
+.h1 {
+    padding: 2rem;
+  color: var(--h1Color);
+  text-transform: lowercase;
+  font-size: 4rem;
+  text-align: center;
+}
+
+/*** HEADER ***/
+.header  {
+  display: block;
+}
+
+.header__input {
+  width: 100%;
+  padding: 1.6rem 4.4rem;
+  border: none;
+  /* quita el borde del input al hacer focus */
+  outline: none;
+  font-size: 2rem;
+  box-shadow: 0px 1px 0px 0px rgba(29,155,240,0.22);
+}
+.header__input::placeholder {
+  color: #000;
+  opacity: 0.2;
+}
+.header__input::-webkit-input-placeholder {
+  color: #000;
+  opacity: 0.2;
+}
+
+/* section section */
+.none {
+  /* display: none; */
+}
+
+.position {
+  position: relative;
+}
+
+/*** SECTION MAIN ***/
+.toggle-check {
+  position: absolute;
+  right: 100%;
+  bottom: 100%;
+  border: none;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+/* `+` aplica el estilo al label inmediato que tenga el `.toggle-check` */
+.toggle-check + label {
+  position: absolute;
+  top: -40px;
+  left: -1px;
+  width: 60px;
+  height: 34px;
+}
+
+.toggle-check + label::before {
+  content: "\2714";
+  font-size: 3rem;
+  color: #dbd4d4;
+  padding: 1rem;
+  cursor: pointer;
+}
