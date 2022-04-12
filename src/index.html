@@ -25,7 +25,7 @@
 
             <ul class="list">
                 <li>
-                    <div>
+                    <div class="divView">
                         <input type="checkbox" class="toggle-check-list">
                         <label >Este es el label</label>
                         <button class="btn-x"></button>
@@ -33,17 +33,25 @@
                 </li>
             </ul>
 
-            <footer>
+            <footer class="display">
                 
-                <span><strong>0</strong> Pendiente(s)</span>
+                <div class="spanDiv">
+
+                    <span class="span"><strong>0</strong> Pendiente(s)</span>
+
+                </div>
     
-                <ul>
-                    <li><a href="">Todos</a></li>
-                    <li><a href="">Pendientes</a></li>
-                    <li><a href="">Completados</a></li>
+                <ul class="options">
+                    <li><a href="#/" class="selected">Todos</a></li>
+                    <li><a href="#/pendientes">Pendientes</a></li>
+                    <li><a href="#/completados">Completados</a></li>
                 </ul>
-    
-                <button>Limpiar Completadas</button>
+                
+                <div class="btnDiv">
+
+                    <button class="btn-clear">Limpiar Completados</button>
+
+                </div>
     
             </footer>
 

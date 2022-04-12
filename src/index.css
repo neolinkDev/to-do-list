@@ -3,6 +3,7 @@
   --h1Color: #1d9bf0;
   --bordeFiltrosColor: #1d9bf0;
   --btnCompletadosColor: #dc3545;
+  --optionsColor: #708090;
 }
 
 @font-face {
@@ -41,12 +42,17 @@ ul {
 
 a  {
     text-decoration: none;
+    color: var(--optionsColor);
 }
 
 button {
   padding: 0;
   border: 0;
   background: none;
+}
+
+strong {
+  font-weight: 400;
 }
 
 .container {
@@ -82,7 +88,7 @@ button {
   border: none;
   /* quita el borde del input al hacer focus */
   outline: none;
-  font-size: 2rem;
+  font-size: 2.5rem;
   box-shadow: 0px 1px 0px 0px rgba(29,155,240,0.22);
 }
 .header__input::placeholder {
@@ -117,7 +123,7 @@ button {
 /* `+` aplica el estilo al label inmediato que tenga el `.toggle-check` */
 .toggle-check + label {
   position: absolute;
-  top: -40px;
+  top: -45px;
   left: -1px;
   width: 60px;
   height: 34px;
@@ -138,6 +144,10 @@ button {
   position: relative;
 }
 
+.divView {
+  box-shadow: 0px 1px 0px 0px rgba(29,155,240,0.22);
+}
+
 .toggle-check-list {
   position: absolute;
   top: 0;
@@ -153,13 +163,13 @@ button {
              /* 15px */
   padding: 15px 27px 15px 45px;
   word-break: break-all;
+  font-size: 2.4rem;
 }
 .toggle-check-list + label {
   background-image: url("data:image/svg+xml,%3Csvg width='32px' height='32px' viewBox='0 0 32 32' id='icon' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:none;%7D%3C/style%3E%3C/defs%3E%3Ctitle%3Echeckbox%3C/title%3E%3Cpath d='M26,4H6A2,2,0,0,0,4,6V26a2,2,0,0,0,2,2H26a2,2,0,0,0,2-2V6A2,2,0,0,0,26,4ZM6,26V6H26V26Z'/%3E%3Crect id='_Transparent_Rectangle_' data-name='&lt;Transparent Rectangle&gt;' class='cls-1' width='32' height='32'/%3E%3C/svg%3E");
 	background-repeat: no-repeat;
 	background-position: left center;
   /* background-size: contain; */
-  
 }
 .toggle-check-list:checked + label {
   background-image: url("data:image/svg+xml,%3Csvg width='32px' height='32px' viewBox='0 0 32 32' id='icon' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:none;%7D%3C/style%3E%3C/defs%3E%3Ctitle%3Echeckbox--checked%3C/title%3E%3Cpath d='M26,4H6A2,2,0,0,0,4,6V26a2,2,0,0,0,2,2H26a2,2,0,0,0,2-2V6A2,2,0,0,0,26,4ZM6,26V6H26V26Z'/%3E%3Cpolygon points='14 21.5 9 16.54 10.59 15 14 18.35 21.41 11 23 12.58 14 21.5'/%3E%3Crect id='_Transparent_Rectangle_' data-name='&lt;Transparent Rectangle&gt;' class='cls-1' width='32' height='32'/%3E%3C/svg%3E");
@@ -189,4 +199,107 @@ button {
 /* le pone el `display: block` a la clase `.btn-x` en todo el `li` */
 .list li:hover .btn-x {
   display: block
+}
+
+/*** FOOTER ***/
+.display  {
+  display: flex;
+  flex-direction: column;
+}
+
+.span {
+  padding: 1rem 0 0 .5rem;
+  font-size: 1.5rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.options li {
+  padding: .5rem;
+  font-size: 2rem;
+}
+
+
+.selected {
+  padding: .3rem;
+  border: 1px solid #ffc107;
+  border-radius: 0.25rem;
+}
+
+.btnDiv {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.btn-clear {
+  /* display: block; */
+  width: 90%;
+  padding: 1.5rem;
+  /* margin-bottom: 0.5rem; */
+  /* margin: 0 auto .5rem auto; */
+  text-align: center;
+  background-color: #dc3545;
+  border: none;
+  color: #fff;
+  border-radius: 0.5rem;
+}
+
+.btn-clear:hover {
+  background-color: #b90517;
+  cursor: pointer;
+}
+
+/*** MEDIA QUERIE ***/
+@media (min-width: 30em /* 480px */) { 
+
+  .display {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   padding: .5rem;
+  }
+
+  .spanDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .span {
+    grid-column: 1 / 2;
+    font-size: 1.4rem;
+    padding: 0;
+  }
+  
+  .options {
+    flex-direction: row;
+    grid-column: 2 / 4;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .options li {
+    font-size: 1.4rem;
+  }
+  
+  .btnDiv {
+    align-items: center;
+    margin: 0;
+    
+  }
+
+  .btn-clear {
+    width: auto;
+    grid-column: 4 / 5;
+    font-size: 1.4rem;
+    padding: 0;
+    margin: 0;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
 }
