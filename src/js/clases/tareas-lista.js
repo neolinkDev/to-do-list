@@ -1,33 +1,38 @@
 
-// Clase de las lista de tareas insertadas
+// Clase manejar/manipular la lista de tareas
 export class TodoList {
 
   constructor() {
-    this.tasks = [];
+    this.todos = [];
   }
 
   /* MÉTODOS */
   // Guardamos la tarea en el array
-  newTask(task) {
-    this.tasks.push(task);
+  newTask( task ) {
+    this.todos.push( task );
   }
 
   // borrando la tarea
   deleteTask( id ) {
-    
+    this.todos = this.todos.filter( todo => todo.id != id);
   }
 
   // marca la tarea completada sabiendo su id
   checkCompleted( id ){
     
-    for (const task of this.tasks) {
+    for (let todo of this.todos) {
+      // console.log(todo)
+      // console.log(id, todo.id)
 
-      // console.log(id, task.id)
-
-      if( task.id === id){
-        task.completed = !task.completed;
+      if( todo.id == id ){
+        todo.completed = !todo.completed;
         break;
       }
     }
+  }
+
+  // Elimina tareas completadas o marcadas
+  deleteCompleted(){
+    this.todos = this.todos.filter( todo => !todo.completed);
   }
 }

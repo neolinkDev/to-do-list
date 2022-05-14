@@ -90,6 +90,9 @@ strong {
   outline: none;
   font-size: 2.5rem;
   box-shadow: 0px 1px 0px 0px rgba(29,155,240,0.22);
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
 }
 .header__input::placeholder {
   color: #000;
@@ -119,6 +122,7 @@ strong {
   height: 1px;
   opacity: 0;
 }
+
 
 /* `+` aplica el estilo al label inmediato que tenga el `.toggle-check` */
 .toggle-check + label {

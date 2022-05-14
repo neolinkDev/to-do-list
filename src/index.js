@@ -1,23 +1,35 @@
+// IMPORTANDO CSS
 import normalize from './css/normalize.css';
 import styles    from './index.css';
 
-// importando clases
-import { Todo }      from './js/clases/tareas.js';
-import { TodoList }  from './js/clases/tareas-lista.js';
-import { tasksHTML } from './js/funciones.js';
+// IMPORTANDO CLASES
+import { Todo } from './js/clases/tareas';
+import { TodoList } from './js/clases/tareas-lista';
 
+// IMPORTANDO FUNCIONES
+import { showTaskHTML } from './js/funciones';
 
-// Instancias
+// IMPORTANDO EVENTOS
+import { inputEvent } from './js/eventos';
+
+// INSTANCIAS CLASES 
 export const todoList = new TodoList();
-const task     = new Todo('Terminar este proyecto de Todo-list');
 
-// task.completed = true;
+const task = new Todo('Aprendiendo a programar un Todo-List');
 
-todoList.newTask(task);
+todoList.newTask( task );
+console.log( todoList );
 
-console.log(todoList);
+showTaskHTML( task );
 
-tasksHTML( task );
+// export const todoList = new TodoList();
+// const task     = new Todo('Terminar este proyecto de Todo-list');
+
+// todoList.newTask(task);
+ 
+// console.log(todoList);
+
+// tasksHTML( task );
 
 
 
