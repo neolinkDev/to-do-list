@@ -1,13 +1,19 @@
 import { Todo } from "./clases/tareas";
 import { todoList } from "..";
 
-// VARIABLES DEL DOM
-const $list = document.getElementById("list"),
-  $input = document.getElementById("header__input"),
-  $allChecked = document.getElementById('all-checked');
+// VARIABLES
+let flag = false;
+let pendient;
 
-const $none = document.querySelector(".none"),
-  $btnNone = document.querySelector(".btn-none");
+// VARIABLES DEL DOM
+const $list   = document.getElementById("list"),
+  $input      = document.getElementById("header__input"),
+  $allChecked = document.getElementById('all-checked'),
+  $option     = document.querySelectorAll('#option');
+
+export const $none = document.querySelector(".none"),
+  $btnNone         = document.querySelector(".btn-none"),
+  $pendings        = document.querySelector('.span strong');
 
 // Mostrando en el HTML la tarea creada
 export const showTaskHTML = (showTask) => {
@@ -28,6 +34,9 @@ export const showTaskHTML = (showTask) => {
   $div.innerHTML = HTMLtask;
   $list.append($div.firstElementChild); // inserta el primer hijo del $div
 
+  // pendingTasks();
+  todoList.pendingTasks( $pendings );
+
   return $div.firstElementChild;
 };
 
@@ -38,7 +47,7 @@ export const fnInputEvent = (e) => {
     (e.key === "Enter" && $input.value.length > 0)
   ) {
 
-    if ($allChecked) $allChecked.checked = false;
+    // if ($allChecked) $allChecked.checked = false;
     // console.log($input.value)
     const newTask = new Todo($input.value);
 
@@ -46,8 +55,22 @@ export const fnInputEvent = (e) => {
     todoList.newTask(newTask);
     // console.log(todoList);
 
+    
     // muestra en el html la tarea
     showTaskHTML(newTask);
+    
+    // Evita mostrar tarea desmarcada al agregar una nueva tarea estando en la opción completados
+    if( flag ){
+      // console.log(newTask)
+      for(let elem of $list.children){
+        // console.log(elem);
+
+        const isCompleted = elem.classList.contains('completed');
+
+        if( !isCompleted ) elem.classList.add('btn-none');
+
+      }
+    }
 
     $none.classList.remove("none");
     $input.value = "";
@@ -60,84 +83,95 @@ export const fnList = (e) => {
     fatherElement = e.target.parentElement.parentElement,
     taskId = fatherElement.getAttribute("data-id");
 
-  // console.log(taskId)
-
   if (targetlocalName.includes("input")) {
     todoList.checkCompleted(taskId);
+    todoList.pendingTasks($pendings);
     fatherElement.classList.toggle("completed");
+
+    showHide();
+
   } else if (targetlocalName.includes("button")) {
     todoList.deleteTask(taskId);
+    todoList.pendingTasks($pendings);
     $list.removeChild(fatherElement);
-  }
-
-  // [] con el número de tareas completadas
-  const clasesCompleted = document.querySelectorAll(".completed");
-
-  // si hay minimo una tarea marcada aparece el boton de limpiar completados si no, no se se muestra
-  if (clasesCompleted.length > 0) {
-    $btnNone.classList.remove("btn-none");
-  } else {
-    $btnNone.classList.add("btn-none");
   }
 
   console.log(todoList); // todoList.todos
   
-  // desmacar el checkbox principal al borrar todas las tareas y oculta las opciones
+  // oculta las opciones
   if(todoList.todos.length === 0){
     $none.classList.add("none");
-    $allChecked.checked = false;
+    // $allChecked.checked = false;
   }
-  // uncheck(todoList);
 };
 
-// desmacar el checkbox principal al borrar todas las tareas y oculta las opciones
-// export function uncheck(todoList){
-//   if(todoList.todos.length === 0){
-//     $none.classList.add("none");
-//     $allChecked.checked = false;
-//   }
-// }
+// muestra u oculta las tareas dependiendo en que opción se encuentre
+function showHide(){
+  if(flag && pendient === 'completado'){
 
-// Función evento change, allCheckedEvent
-export function fnAllCheckedEvent(e){
-  const allCheckboxes = document.querySelectorAll("input[type='checkbox']");
+    for(let elem of $list.children){
+  
+      const isCompleted = elem.classList.contains('completed');
 
-  // marcando o desmarcando los checkbox
-  if (this.checked) {
-    for (let i = 0; i < allCheckboxes.length; i++) {
-
-      allCheckboxes[i].checked = true;
-
-    }
-  } else {
-    for (let i = 0; i < allCheckboxes.length; i++) {
-
-      allCheckboxes[i].checked = false;
+      if( !isCompleted ) elem.classList.add('btn-none');
       
     }
+    return;
   }
 
-  let composed = e.composedPath();
+  if(!flag && pendient === 'pendiente'){
 
-  // HTML collection que tiene las `li` de las tareas
-  const $lis = composed[1].children[2].children;
-  console.log($lis);
+    for(let elem of $list.children){
   
-  const $inputsCheck = document.querySelectorAll(".toggle-check-list");
+      const isCompleted = elem.classList.contains('completed');
 
-  for (let i = 0; i < $inputsCheck.length; i++) {
-    if (!$inputsCheck[i].checked) {
-      // $inputsCheck[i].checked = true;
-      $lis[i].classList.remove("completed");
-      $btnNone.classList.add("btn-none");
-    } else {
-      // $inputsCheck[i].checked = false;
-      $lis[i].classList.add("completed");
-      $btnNone.classList.remove("btn-none");
+      if( isCompleted ) elem.classList.add('btn-none');
+      
     }
-  }
+    return;
+  }   
+}
+
+// Función evento change, allCheckedEvent
+// export function fnAllCheckedEvent(e){
+//   const allCheckboxes = document.querySelectorAll("input[type='checkbox']");
+
+//   // marcando o desmarcando los checkbox
+//   if (this.checked) {
+//     for (let i = 0; i < allCheckboxes.length; i++) {
+
+//       allCheckboxes[i].checked = true;
+
+//     }
+//   } else {
+//     for (let i = 0; i < allCheckboxes.length; i++) {
+
+//       allCheckboxes[i].checked = false;
+      
+//     }
+//   }
+
+//   let composed = e.composedPath();
+
+//   // HTML collection que tiene las `li` de las tareas
+//   const $lis = composed[1].children[2].children;
+//   console.log($lis);
   
-};
+//   const $inputsCheck = document.querySelectorAll(".toggle-check-list");
+
+//   for (let i = 0; i < $inputsCheck.length; i++) {
+//     if (!$inputsCheck[i].checked) {
+//       // $inputsCheck[i].checked = true;
+//       $lis[i].classList.remove("completed");
+//       $btnNone.classList.add("btn-none");
+//     } else {
+//       // $inputsCheck[i].checked = false;
+//       $lis[i].classList.add("completed");
+//       $btnNone.classList.remove("btn-none");
+//     }
+//   }
+  
+// };
 
 // Función que recorre el arreglo de tareas en orden inverso para eliminar las tareas en el HTML
 export const fnDeleteCompleted = () => {
@@ -156,31 +190,47 @@ export const fnDeleteCompleted = () => {
 
 }
 
+/* fn para el evento click para la manipulación de las opciones de las tareas */
+export const fnOptions = (e) => {
+  
+  // saber el texto al que le damos click en la opciones
+  const filter = e.target.text;
+  
+  // console.log($option)
 
+  // colocando "cuadro" a la opcion que demos click con la clase `selected`
+  // removemos la clase selected
+  $option.forEach( elem => elem.classList.remove('selected'));
 
-// // import { inputEvent } from "./eventos-fns.js";
+  // console.log(e.target);
 
-// // Variables del DOM
-// // $ hace referencia a los id del DOM
-// const $list = document.getElementById('list');
+  e.target.classList.add('selected');
 
-// // Mostrando en el HTML la tarea insertada
-// export const tasksHTML = ( task ) => {
+  // iteramos sobre las tareas
+  for(let elem of $list.children){
+    // console.log(elem);
 
-//     const $div = document.createElement('div');
+    elem.classList.remove('btn-none');
 
-//     const taskHTML = `
-//     <li class="${ (task.completed) ? 'completed' : '' }" data-id="${ task.id }" >
-//         <div class="divView">
-//             <input type="checkbox" class="toggle-check-list" ${ ( task.completed ) ? 'checked' : '' } >
-//             <label>${ task.task }</label>
-//             <button class="btn-x"></button>
-//         </div>
-//     </li>
-//     `;
+    const isCompleted = elem.classList.contains('completed');
 
-//     $div.innerHTML = taskHTML;
-//     $list.appendChild($div.firstElementChild);
+    switch ( filter ) {
+      case 'Pendientes':
+        if( isCompleted ) elem.classList.add('btn-none');
+        flag = false;
+        pendient = 'pendiente';
+      break;
+      
+      case 'Completados':
+        if( !isCompleted ) elem.classList.add('btn-none');
+        flag = true;
+        pendient = 'completado';
+      break;
 
-//     return $div.firstElementChild;
-// }
+      default:
+        flag = false;
+        pendient = 'todo';
+        break;
+    }
+  }
+}

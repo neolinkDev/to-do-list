@@ -20,8 +20,8 @@
 
         <section class="none position">
 
-            <input class="toggle-check" type="checkbox" id="all-checked">
-            <label for="all-checked"></label>
+            <!-- <input class="toggle-check" type="checkbox" id="all-checked">
+            <label for="all-checked"></label> -->
 
             <ul class="list" id="list">
                 <!-- <li>
@@ -42,13 +42,19 @@
                 </div>
     
                 <ul class="options">
-                    <li><a href="#/" class="selected">Todos</a></li>
-                    <li><a href="#/pendientes">Pendientes</a></li>
-                    <li><a href="#/completados">Completados</a></li>
+                    <li>
+                        <a id="option" class="selected" href="#/">Todos</a>
+                    </li>
+                    <li>
+                        <a id="option" href="#/pendientes">Pendientes</a>
+                    </li>
+                    <li>
+                        <a id="option" href="#/completados">Completados</a>
+                    </li>
                 </ul>
                 
                 <div class="btnDiv">
-
+                                  <!-- clase btn-none -->
                     <button class="btn-clear btn-none" id="btn-clear">Limpiar Completados</button>
 
                 </div>

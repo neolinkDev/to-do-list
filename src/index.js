@@ -7,7 +7,7 @@ import { Todo } from './js/clases/tareas';
 import { TodoList } from './js/clases/tareas-lista';
 
 // IMPORTANDO FUNCIONES
-import { showTaskHTML } from './js/funciones';
+import { $none, showTaskHTML } from './js/funciones';
 
 // IMPORTANDO EVENTOS
 import { inputEvent } from './js/eventos';
@@ -15,21 +15,22 @@ import { inputEvent } from './js/eventos';
 // INSTANCIAS CLASES 
 export const todoList = new TodoList();
 
-const task = new Todo('Aprendiendo a programar un Todo-List');
+// iterando para mostrar las tareas en el HTML
+todoList.todos.forEach( todo =>  {
+    showTaskHTML(todo);
+    $none.classList.remove("none");
+});
 
-todoList.newTask( task );
-console.log( todoList );
+console.log('todo', todoList.todos)
 
-showTaskHTML( task );
 
-// export const todoList = new TodoList();
-// const task     = new Todo('Terminar este proyecto de Todo-list');
 
-// todoList.newTask(task);
- 
-// console.log(todoList);
+// const task = new Todo('Aprendiendo a programar un Todo-List');
 
-// tasksHTML( task );
+// todoList.newTask( task );
+// console.log( todoList );
+
+// showTaskHTML( task );
 
 
 

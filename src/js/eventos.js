@@ -1,6 +1,7 @@
-// IMPORTANDO FUNCIONES
 import { todoList } from "..";
-import { fnAllCheckedEvent, fnDeleteCompleted, fnInputEvent, fnList } from "./funciones";
+
+// IMPORTANDO FUNCIONES
+import { fnAllCheckedEvent, fnDeleteCompleted, fnInputEvent, fnList, $none, fnOptions, $btnNone, $pendings } from "./funciones";
 
 // VARIABLES DEL DOM
 const $input = document.getElementById("header__input"),
@@ -12,18 +13,34 @@ const $input = document.getElementById("header__input"),
 export const inputEvent = $input.addEventListener("keyup", fnInputEvent);
 
 // Evento click de la `ul` de cada tarea con el #list, marca, borra tareas
-const listEvent = $list.addEventListener('click', fnList);
+$list.addEventListener('click', fnList);
 
 // Evento change, marca/desmarca los checkbox de las tareas
-const allCheckedEvent = $allChecked.addEventListener('change', fnAllCheckedEvent);
+// const allCheckedEvent = $allChecked.addEventListener('change', fnAllCheckedEvent);
 
 // Elimina tareas completadas
+// Manipula las opciones de las tareas
 document.addEventListener('click', (e) => {
+    
     if(e.target.matches('#btn-clear')){
 
         todoList.deleteCompleted();
+        todoList.pendingTasks($pendings);
         fnDeleteCompleted();
+
+        // ocultar opciones y poner en falso el checked principal
+        if(todoList.todos.length === 0){
+            $none.classList.add("none");
+            // $allChecked.checked = false;
+        }
     }
+
+    if(e.target.matches('#option')){
+        // console.log('Click desde las opciones');
+
+        fnOptions(e);
+    }
+
 })
 
 
