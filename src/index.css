@@ -191,13 +191,13 @@ strong {
 }
 
 .btn-x {
-  display: none;
+  /* display: none; */
   position: absolute;
   top: 0;
   bottom: 0;
   right: 1rem;
   color: var(--btnCompletadosColor);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: bold;
   margin-right: 5px;
   cursor: pointer;
@@ -277,6 +277,10 @@ strong {
 /*** MEDIA QUERIE ***/
 /* @media (min-width: 30em 480px) {  */
 @media (min-width: 37.5em /* 600px */) { 
+
+  .btn-x {
+    display: none;
+  }
 
   .display {
    display: grid;
