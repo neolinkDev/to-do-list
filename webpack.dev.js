@@ -1,6 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+
 // const CopyPlugin = require("copy-webpack-plugin");
 // const Dotenv = require('dotenv-webpack');
 
@@ -72,6 +74,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      favicon: "./src/assets/images/favicon.png",
+      'meta': {
+        'theme-color': '#1d9bf0'
+      },
       inject: true,
       template: "./src/index.html",
       filename: "./index.html",

@@ -62,6 +62,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      favicon: "./src/assets/images/favicon.png", //
+      'meta': {                          //
+        'theme-color': '#1d9bf0'
+      },
       inject: true,
       template: './src/index.html',
       filename: './index.html',

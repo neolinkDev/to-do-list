@@ -96,7 +96,7 @@ export const fnList = (e) => {
     $list.removeChild(fatherElement);
   }
 
-  console.log(todoList); // todoList.todos
+  // console.log(todoList); // todoList.todos
   
   // oculta las opciones
   if(todoList.todos.length === 0){

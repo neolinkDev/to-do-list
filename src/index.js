@@ -21,7 +21,7 @@ todoList.todos.forEach( todo =>  {
     $none.classList.remove("none");
 });
 
-console.log('todo', todoList.todos)
+// console.log('todo', todoList.todos)
 
 
 
