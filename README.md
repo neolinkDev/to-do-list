@@ -18,7 +18,7 @@ npm start
 ```
 Abrir <http://localhost:9000/> para verlo en su navegador / Open http://localhost:9000 to view it in your browser.
 
-### Crea la carpeta `dist` para producción / Builds the dist folder for production:
+### Crea la carpeta `dist` para producción / Builds the `dist` folder for production:
 ```javascript
 npm run build
 ```
